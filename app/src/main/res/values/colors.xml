@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#CE0000</color>
+    <color name="colorPrimaryDark">#CE0000</color>
+    <color name="colorAccent">#11A10C</color>
+    <color name="buttonRed">#9f0000</color>
+    <color name="rbuttonRed">#709f0000</color>
+    <color name="success">#11A10C</color>
+    <color name="colorProfile">#3B4041</color>
+    <color name="mainBackground">#D7D7D7</color>
+    <color name="senderColor">#A0179B</color>
+</resources>

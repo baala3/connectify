@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/colorPrimary">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:paddingBottom="60dp"
+            android:paddingTop="10dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="40dp"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimary"
+                    android:src="@drawable/ic_baseline_add_24"
+                    app:civ_border_color="@color/colorAccent"
+                    app:civ_border_width="3dp"
+                    android:id="@+id/add_image_bth"
+                    app:civ_circle_background_color="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/setUPImage" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/setUPImage"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logo"
+                    app:civ_border_color="#fff"
+                    app:civ_border_width="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <EditText
+                android:id="@+id/setUpName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#70ffffff"
+                android:hint="Name"
+                android:inputType="text"
+                android:textColor="#fff"
+                android:textColorHint="#70ffffff" />
+
+            <EditText
+                android:id="@+id/setUpFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#70ffffff"
+                android:hint="Full Name"
+                android:inputType="text"
+                android:textColor="#fff"
+                android:textColorHint="#70ffffff" />
+
+            <EditText
+                android:id="@+id/setUpCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="#70ffffff"
+                android:hint="Country"
+                android:inputType="text"
+                android:textColor="#fff"
+                android:textColorHint="#70ffffff" />
+
+            <ProgressBar
+                android:id="@+id/signupprogressbar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/setUpAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/button"
+                android:enabled="false"
+                android:text="Create Account"
+                android:textAllCaps="false"
+                android:textColor="#70ffffff"
+                android:textSize="16sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="60dp"
+                    android:layout_weight="4"
+                    android:background="#fff"
+                    android:baselineAligned="false" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:text="or"
+                    android:textColor="#fff" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="60dp"
+                    android:layout_weight="4"
+                    android:background="#fff" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/setUpBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="back"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</FrameLayout>

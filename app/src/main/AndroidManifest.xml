@@ -13,7 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".AddStoryActivity"></activity>
+        <activity android:name=".FullStoryActivity" />
+        <activity
+            android:name=".MainActivity2"
+            android:label="@string/title_activity_main2" />
+        <activity android:name=".ImageViewActivity" />
+        <activity android:name=".ChatActivity" />
         <activity android:name=".PersonActivity" />
         <activity android:name=".CommentsActivity" />
         <activity android:name=".MainActivity" />

@@ -2,12 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/qqq"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="3dp"
     android:layout_marginBottom="3dp"
-    android:background="@color/mainBackground"
-    android:elevation="8dp">
+    android:elevation="8dp"
+    android:background="#F2FFFFFF"
+   >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/post_profile_image"
@@ -18,7 +20,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/profile"
         app:civ_border_color="#000"
-        app:civ_border_width="2dp"
+        app:civ_border_width="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,13 +71,13 @@
         android:id="@+id/click_post_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/click_post_des_name"
-        app:layout_constraintTop_toBottomOf="@+id/like" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/click_post_des_name" />
 
     <ImageView
         android:id="@+id/click_post_image"
@@ -120,22 +122,22 @@
         android:id="@+id/no_of_likes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:gravity="center_vertical"
         android:text="Like"
         android:textColor="#000"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/like"
-        app:layout_constraintStart_toEndOf="@+id/like"
-        app:layout_constraintTop_toTopOf="@+id/like" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/like" />
 
     <ImageButton
         android:id="@+id/comments"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/like"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/like"
         app:layout_constraintTop_toTopOf="@+id/like"
         app:srcCompat="@drawable/comment" />
 
@@ -144,6 +146,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/click_post_image"
         app:srcCompat="@drawable/dislike" />
@@ -152,7 +156,8 @@
         android:id="@+id/moreBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/post_user_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/post_user_name"
@@ -162,12 +167,23 @@
         android:id="@+id/click_post_des_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:text="TextView"
         android:textColor="#000"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/like" />
+        app:layout_constraintTop_toBottomOf="@+id/no_of_likes" />
+
+    <ImageButton
+        android:id="@+id/savepost_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/no_of_likes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/like"
+        app:srcCompat="@drawable/ic_baseline_bookmark_border_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

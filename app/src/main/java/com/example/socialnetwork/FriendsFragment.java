@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,10 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -83,8 +81,8 @@ public class FriendsFragment extends Fragment {
         }
     }
     RecyclerView myFrdList;
-    DatabaseReference friendRef,userRef;
-    String currentUserId;
+    DatabaseReference friendRef,userRef,friendsRf;
+   public    String currentUserId="";
     TextView textView4;
 
     @Override
@@ -92,10 +90,10 @@ public class FriendsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_friends, container, false);
-        currentUserId= FirebaseAuth.getInstance().getCurrentUser().getUid();
+      if(currentUserId.equals(""))  currentUserId= FirebaseAuth.getInstance().getCurrentUser().getUid();
         friendRef= FirebaseDatabase.getInstance().getReference().child("Friends").child(currentUserId);
         userRef= FirebaseDatabase.getInstance().getReference().child("Users");
-
+        friendsRf= FirebaseDatabase.getInstance().getReference().child("Friends");
         myFrdList=v.findViewById(R.id.frdRecycler);
         textView4=v.findViewById(R.id.textView4);
         myFrdList.setHasFixedSize(true);
@@ -140,7 +138,7 @@ public class FriendsFragment extends Fragment {
                             holder.mView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    if(MainActivity.currentfrag==MainActivity.MESSAGES)
+                                    if(MainActivity2.currentfrag==MainActivity2.MESSAGES)
                                     {
                                         textView4.setVisibility(View.GONE);
                                         Intent personI=new Intent(getActivity(),ChatActivity.class);
@@ -151,9 +149,11 @@ public class FriendsFragment extends Fragment {
                                     else
                                     {
                                         textView4.setVisibility(View.VISIBLE);
+                                        textView4.setText(uname+" Friends");
                                         CharSequence options[]=new CharSequence[]{
                                                 uname+"'s Profile",
-                                                "Send Message"
+                                                "Send Message",
+                                                "Un friend"+uname
                                         };
                                         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                                         builder.setTitle("select options");
@@ -174,6 +174,10 @@ public class FriendsFragment extends Fragment {
                                                     personI.putExtra("messageReceiverId",frdId);
                                                     personI.putExtra("messageReceiverName",uname);
                                                     startActivity(personI);
+                                                }
+                                                if(which==2)
+                                                {
+                                                    unFriendAnExistingFriend(frdId);
                                                 }
 
                                             }
@@ -230,6 +234,35 @@ public class FriendsFragment extends Fragment {
         }
     }
 
+    private void unFriendAnExistingFriend(final  String receiver_user_id) {
+     final    String sender_user_id=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        friendsRf.child(sender_user_id).child(receiver_user_id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    friendsRf.child(receiver_user_id).child(sender_user_id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful())
+                            {
 
+
+                            }else {
+
+                            }
+
+                        }
+                    });
+
+                }
+                else
+                {
+
+                }
+
+            }
+        });
+    }
 
 }

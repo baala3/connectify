@@ -1,14 +1,32 @@
 package com.example.socialnetwork;
 
 class Messages {
-    String date,time,type,from,messageText;
+    String date,time,type,from,messageText,to,mid;
 
-    public Messages(String date, String time, String type, String from, String messageText) {
+    public Messages(String date, String time, String type, String from, String messageText, String to, String mid) {
         this.date = date;
         this.time = time;
         this.type = type;
         this.from = from;
         this.messageText = messageText;
+        this.to = to;
+        this.mid = mid;
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
     }
 
     public String getDate() {

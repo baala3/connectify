@@ -98,7 +98,7 @@ public class MyPostsFragment extends Fragment {
         postRef= FirebaseDatabase.getInstance().getReference().child("Posts");
         userRef= FirebaseDatabase.getInstance().getReference().child("Users");
         likeRef= FirebaseDatabase.getInstance().getReference().child("Likes");
-        my_post_list=v.findViewById(R.id.my_post_list);
+        my_post_list=v.findViewById(R.id.llllllo);
         my_post_list.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         linearLayoutManager.setReverseLayout(true);
@@ -160,11 +160,10 @@ public class MyPostsFragment extends Fragment {
                 holder.comment.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent commentsIntnent=new Intent(getActivity(),CommentsActivity.class);
+                        Intent commentsIntnent=new Intent(getActivity(),ImageViewActivity.class);
                         commentsIntnent.putExtra("postKey",postKey);
-                        commentsIntnent.putExtra("cname",model.getFullName());
-                        commentsIntnent.putExtra("cpost",model.getPostImage());
-                        commentsIntnent.putExtra("cimage",model.getProfileImage());
+                        commentsIntnent.putExtra("comment","false");
+                        commentsIntnent.putExtra("uid",model.getUid());
                         startActivity(commentsIntnent);
 
                     }
@@ -208,8 +207,10 @@ public class MyPostsFragment extends Fragment {
                                                             getRef(position).removeValue();
                                                             break;
                                                         case 2:
-                                                            Intent commentsIntnent=new Intent(getActivity(),CommentsActivity.class);
+                                                            Intent commentsIntnent=new Intent(getActivity(),ImageViewActivity.class);
                                                             commentsIntnent.putExtra("postKey",postKey);
+                                                            commentsIntnent.putExtra("comment","false");
+                                                            commentsIntnent.putExtra("uid",model.getUid());
                                                             startActivity(commentsIntnent);
                                                             break;
                                                         case 3:
@@ -266,8 +267,10 @@ public class MyPostsFragment extends Fragment {
                                                             startActivity(PersonI);
                                                             break;
                                                         case 1:
-                                                            Intent commentsIntnent=new Intent(getActivity(),CommentsActivity.class);
+                                                            Intent commentsIntnent=new Intent(getActivity(),ImageViewActivity.class);
                                                             commentsIntnent.putExtra("postKey",postKey);
+                                                            commentsIntnent.putExtra("comment","false");
+                                                            commentsIntnent.putExtra("uid",model.getUid());
                                                             startActivity(commentsIntnent);
                                                             break;
                                                         case 2:

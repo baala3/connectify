@@ -105,7 +105,7 @@ public class SettingsFragment extends Fragment {
         currentUserId=mAuth.getCurrentUser().getUid();
         settingUserRef= FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
         reference= FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid());
-        loadingBar=new ProgressDialog(getActivity());
+        loadingBar=new ProgressDialog(activity);
         settings_profile_status=v.findViewById(R.id.settings_profile_status);
         settings_user_name=v.findViewById(R.id.settings_user_name);
         settings_user_fullname=v.findViewById(R.id.settings_user_fullname);
@@ -128,7 +128,7 @@ public class SettingsFragment extends Fragment {
                     String profileImage=snapshot.child("profileImage").getValue().toString();
                     String relationShipStatus=snapshot.child("relationShipStatus").getValue().toString();
                     String status=snapshot.child("status").getValue().toString();
-                    Picasso.with(getActivity()).load(profileImage).placeholder(R.drawable.profile).into(settings_profile_image);
+                    Picasso.with(activity).load(profileImage).placeholder(R.drawable.profile).into(settings_profile_image);
                     settings_profile_status.setText(status);
                     settings_user_name.setText(name);
                     settings_user_fullname.setText(fullName);
@@ -180,7 +180,7 @@ public class SettingsFragment extends Fragment {
         }
         else
         {
-            Toast.makeText(getActivity(),"Please Fill all fields",Toast.LENGTH_LONG).show();
+            Toast.makeText(activity,"Please Fill all fields",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -205,9 +205,9 @@ public class SettingsFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(getActivity(), "Profile Success retreived", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(activity, "Profile Success retreived", Toast.LENGTH_LONG).show();
                                     } else {
-                                        Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(activity, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                     }
                                     loadingBar.dismiss();
                                 }
@@ -219,7 +219,7 @@ public class SettingsFragment extends Fragment {
                 else
                 {
                     loadingBar.dismiss();
-                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, task.getException().getMessage(), Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -246,14 +246,14 @@ public class SettingsFragment extends Fragment {
                 if(task.isSuccessful())
                 {
                     loadingBar.dismiss();
-                    Toast.makeText(getActivity(),"Success",Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity,"Success",Toast.LENGTH_LONG).show();
                 }
 
                 else
                 {
 
                     loadingBar.dismiss();
-                    Toast.makeText(getActivity(),task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity,task.getException().getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -262,6 +262,13 @@ public class SettingsFragment extends Fragment {
     boolean Ch(String s)
     {
         return  (s.length()>0);
+    }
+
+    public MainActivity2 activity;
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (MainActivity2) activity;
     }
 
     @Override

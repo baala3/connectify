@@ -4,25 +4,33 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
+import android.view.WindowManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashScreenActivity extends AppCompatActivity {
-    FirebaseAuth firebaseAuth;
+    private static int SPLASH_SCREEN_TIME_OUT=100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
-        SystemClock.sleep(200);
-        firebaseAuth=FirebaseAuth.getInstance();
-    }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                TRIGGER();
+            }
+        }, SPLASH_SCREEN_TIME_OUT);
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+
+    }
+    void TRIGGER()
+    {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            Intent i = new Intent(this, MainActivity.class);
+            Intent i = new Intent(this, MainActivity2.class);
             startActivity(i);
             finish();
         }
@@ -32,6 +40,6 @@ public class SplashScreenActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         }
+    };
 
-    }
 }

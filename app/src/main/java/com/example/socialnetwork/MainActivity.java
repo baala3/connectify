@@ -58,12 +58,13 @@ public class MainActivity extends AppCompatActivity {
     Button confirmDialogNo,confirmDialogYes;
     ///confirmDialog
     public static int currentfrag=-1;
-    public  static int ADD_POST=3,PROFILE=6,HOME=0,FRIENDS=4,FIND_FRIENDS=5,MESSAGES=1,SETTINGS=7,MY_POST=2;
+    public  static int ADD_POST=3,PROFILE=6,HOME=0,FRIENDS=4,FIND_FRIENDS=5,MESSAGES=1,SETTINGS=7,MY_POST=2,REQ=8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ///confirmDialog
         confirmDialog=new Dialog(MainActivity.this);
         confirmDialog.setContentView(R.layout.confirm_dialog);
@@ -113,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         navigationView.getMenu().getItem(0).setChecked(true);
         setfragment("home",new HomeFragment(),HOME);
         View navView=navigationView.getHeaderView(0);
@@ -217,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public  void setfragment(String title,Fragment fragment,int prevFrag)
+    public  void setfragment(String title, Fragment fragment, int prevFrag)
     {
         if(currentfrag!=prevFrag)
         {
@@ -228,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
             navigationView.getMenu().getItem(prevFrag).setChecked(true);
             currentfrag=prevFrag;
             getSupportFragmentManager().beginTransaction().
-                    setCustomAnimations(R.anim.fade_n,R.anim.fade_out).replace(frameLayout.getId(),fragment).commit();
+                    setCustomAnimations(R.anim.slide_left,R.anim.slide_out_from_right).replace(frameLayout.getId(),fragment).commit();
 
         }
       }
@@ -270,6 +272,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_settings:
                 setfragment("settings",new SettingsFragment(),SETTINGS);
              //   Toast.makeText(MainActivity.this,"nav_settings",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_request:
+                setfragment("Friend Request",new RequestFragment(),REQ);
                 break;
             case R.id.nav_logout:
                 updateUserStatus("offline");

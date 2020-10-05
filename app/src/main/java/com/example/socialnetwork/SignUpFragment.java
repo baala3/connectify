@@ -40,6 +40,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -117,6 +118,7 @@ public class SignUpFragment extends Fragment {
 LinearLayout setupconatiner;
     CircleImageView setUPImage,add_image_bth;
     EditText setUpName,setUpFullName,setUpCountry;
+    EditText setUpdob,setUpgender,setUprelation;
     Button setUpAccount;
     TextView setUpBack;
     final static  int GALLERY_PICK=1;
@@ -147,7 +149,6 @@ LinearLayout setupconatiner;
         firebaseAuth=FirebaseAuth.getInstance();
         firebaseFirestore=FirebaseFirestore.getInstance();
         textWatchers();
-
         alreadyhaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,6 +170,12 @@ LinearLayout setupconatiner;
         setUPImage.setImageURI(resultUri);
         add_image_bth=v.findViewById(R.id.add_image_bth);
         setUpName=v.findViewById(R.id.setUpName);
+
+        setUpdob=v.findViewById(R.id.setUpdob);
+        setUprelation=v.findViewById(R.id.setUprelation);
+        setUpgender=v.findViewById(R.id.setUpgender);
+
+
         setUpFullName=v.findViewById(R.id.setUpFullName);
         setUpCountry=v.findViewById(R.id.setUpCountry);
         setUpAccount=v.findViewById(R.id.setUpAccount);
@@ -265,6 +272,55 @@ LinearLayout setupconatiner;
 
             }
         });
+
+        setUpgender.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setUpcheckinputs();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        setUprelation.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setUpcheckinputs();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        setUpdob.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setUpcheckinputs();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void setUpcheckinputs() {
@@ -272,10 +328,10 @@ LinearLayout setupconatiner;
             if(!TextUtils.isEmpty(setUpFullName.getText()))
             {
                 if (!TextUtils.isEmpty(setUpName.getText()) ) {
-                    if (!TextUtils.isEmpty(setUpCountry.getText()) ) {
+                    if (!TextUtils.isEmpty(setUpCountry.getText())  && !TextUtils.isEmpty(setUpdob.getText()) &&
+                            !TextUtils.isEmpty(setUprelation.getText()) && !TextUtils.isEmpty(setUpgender.getText())) {
                         setUpAccount.setEnabled(true);
                         setUpAccount.setTextColor(Color.rgb(255, 255, 255));
-
                     }
                     else {
                         setUpAccount.setEnabled(false);
@@ -432,10 +488,10 @@ LinearLayout setupconatiner;
                             user.put("name",setUpName.getText().toString());
                             user.put("country",setUpCountry.getText().toString());
                             user.put("status","hey there ");
-                            user.put("gender","none");
-                            user.put("dob","none");
+                            user.put("gender",setUpgender.getText().toString());
+                            user.put("dob",setUpdob.getText().toString());
                             user.put("profileImage","null");
-                            user.put("relationShipStatus","none");
+                            user.put("relationShipStatus",setUprelation.getText().toString());
                             loadingBar.setMessage("Please Wait....Uploading Image");
                             reference= FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid());
                             final StorageReference filepath = userProfileImage.child(FirebaseAuth.getInstance().getUid() + ".jpg");
@@ -501,9 +557,22 @@ LinearLayout setupconatiner;
                 });
     }
     private void main() {
-        Intent i=new Intent(activity,MainActivity.class);
-        startActivity(i);
-        activity.finish();
+
+        String currentUserId=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String deviceToken= FirebaseInstanceId.getInstance().getToken();
+
+        reference.child("device_token").setValue(deviceToken).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {  Intent i=new Intent(activity,MainActivity2.class);
+                    startActivity(i);
+                    activity.finish();
+
+                }
+            }
+        });
+
     }
     private void setFragment(Fragment fragment,int PrevFrag,int CurrentFrag) {
         RegisterActivity.currentFrag=CurrentFrag;

@@ -44,6 +44,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import static android.content.ContentValues.TAG;
 
@@ -111,6 +114,7 @@ ImageView google;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     ProgressDialog loadingBar;
+    DatabaseReference userRef;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,6 +123,7 @@ ImageView google;
         View v= inflater.inflate(R.layout.fragment_sign_in, container, false);
         loadingBar=new ProgressDialog(getActivity());
         mAuth=FirebaseAuth.getInstance();
+        userRef=FirebaseDatabase.getInstance().getReference().child("Users");
         dontHaveAccount=v.findViewById(R.id.signindonthaveaccount);
         memail =v.findViewById(R.id.signinemail);
         google =v.findViewById(R.id.google_sign_in_btn);
@@ -252,11 +257,6 @@ ImageView google;
                 setFragment(new SignUpFragment(),RegisterActivity.SIGN_IN,RegisterActivity.SIGN_UP);
             }
         });
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
 
 
         return  v;
@@ -394,9 +394,24 @@ ImageView google;
         }
     }
     private void sendToMain() {
-        Intent main=new Intent(getActivity(),MainActivity.class);
-        startActivity(main);
-        getActivity().finish();
+        String currentUserId=mAuth.getCurrentUser().getUid();
+       String deviceToken= FirebaseInstanceId.getInstance().getToken();
+
+     userRef.child(currentUserId).child("device_token").setValue(deviceToken).addOnCompleteListener(new OnCompleteListener<Void>() {
+         @Override
+         public void onComplete(@NonNull Task<Void> task) {
+             if(task.isSuccessful())
+             {
+
+                 Intent main=new Intent(getActivity(),MainActivity2.class);
+                 startActivity(main);
+                 getActivity().finish();
+             }
+         }
+     });
+
+
+
     }
     private void setFragment(Fragment fragment,int PrevFrag,int CurrentFrag) {
         RegisterActivity.currentFrag=CurrentFrag;

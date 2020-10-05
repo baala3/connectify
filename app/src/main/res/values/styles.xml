@@ -12,5 +12,19 @@
     <item name="colorAccent">@color/colorPrimary</item>
 
 </style>
+    <style parent="Theme.AppCompat.Light.NoActionBar" name="mainTheme">
+        <item name="colorPrimary">#fff</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
 
+    </style>
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">#000</item>
+
+    </style>
+    <style name="scrollTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorPrimary">#fff</item>
+    </style>
 </resources>

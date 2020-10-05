@@ -241,7 +241,7 @@ public class PostFragment extends Fragment {
                         if(task.isSuccessful())
                         {
 
-                            setfragment("Home",new HomeFragment(), MainActivity.HOME);
+                           activity.setfragment("Home",new HomeFragment(), MainActivity2.HOME);
                         loadingBar.dismiss();
                             Toast.makeText(getActivity(),"Grand Success",Toast.LENGTH_LONG).show();
                         }
@@ -289,24 +289,10 @@ loadingBar.dismiss();
         }
     }
 
-    public  void setfragment(String title,Fragment fragment,int prevFrag)
-    {
-
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            activity.getSupportActionBar().setTitle(title);
-            if(activity.currentfrag!=-1)
-                activity.navigationView.getMenu().getItem(activity.currentfrag).setChecked(false);
-            activity.navigationView.getMenu().getItem(prevFrag).setChecked(true);
-            activity.currentfrag=prevFrag;
-            activity.getSupportFragmentManager().beginTransaction().
-                    setCustomAnimations(R.anim.fade_n,R.anim.fade_out).replace(activity.frameLayout.getId(),fragment).commit();
-
-
-    }
-    public MainActivity activity;
+    public MainActivity2 activity;
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.activity = (MainActivity) activity;
+        this.activity = (MainActivity2) activity;
     }
 }
